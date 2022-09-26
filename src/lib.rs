@@ -30,6 +30,7 @@ const PYTHAGOREAN_MATRICES:
     ((-1,  2, 2), (-2,  1, 2), (-2,  2, 3)),
 ];
 
+/// Iterator over Pythagorean triples in ascending order.
 pub struct PythagoreanTripleIter {
     min_heap: BinaryHeap<WrappedTriple>,
 }
@@ -39,8 +40,8 @@ impl Iterator for PythagoreanTripleIter {
 
     fn next(&mut self) -> Option<Self::Item> {
         // Cannot panic as `min_heap` is never empty; it is initialized
-        // with one element, then three more elements are added every
-        // time an elemenet is removed.
+        // with one triple, then three more elements are added every
+        // time a triple is removed.
         let WrappedTriple(j, k, l) = self.min_heap.pop().unwrap();
         for ((a, b, c), (d, e, f), (g, h, i)) in PYTHAGOREAN_MATRICES {
             let m = a*j + b*k + c*l;
@@ -56,22 +57,25 @@ impl Iterator for PythagoreanTripleIter {
 /// Produces all primitive Pythagorean triples in sorted order.
 /// That is all coprime triples (a < b < c) such that a^2 + b^2 = c^2,
 /// ordered by increasing c, then a, then b.
-///
-/// Extremely time efficient, but unfortunately uses exponential memory...
 pub fn pythagorean_triples() -> PythagoreanTripleIter {
     let mut min_heap = BinaryHeap::new();
     min_heap.push(INITIAL_PYTHAGOREAN_TRIPLE);
     PythagoreanTripleIter { min_heap }
 }
 
-#[test]
-fn test_ascending() {
-    let mut triple_generator = pythagorean_triples();
-    let mut previous = triple_generator.next().unwrap();
-    for next@(x, _, z) in triple_generator.take(999_999) {
-        let (a, _, c) = previous;
-        assert!((c, a) < (z, x));
+#[cfg(test)]
+mod test {
+    use super::*;
 
-        previous = next;
+    #[test]
+    fn test_ascending() {
+        let mut triple_generator = pythagorean_triples();
+        let mut previous = triple_generator.next().unwrap();
+        for next@(x, _, z) in triple_generator.take(999_999) {
+            let (a, _, c) = previous;
+            assert!((c, a) < (z, x));
+
+            previous = next;
+        }
     }
 }
