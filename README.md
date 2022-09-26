@@ -1,6 +1,6 @@
 # Efficient ordered generation of primitive Pythagorean triples
 
-Time-efficient generation of primitive pythagorean triples in ascending order.
+Efficient generation of primitive pythagorean triples in ascending order.
 
 A **Pythagorean triple** is a triple of positive integers (a,b,c) such that a² + b² = c². A **primitive** Pythagorean triple is a triple such that (a,b,c) have no common factor between them (i.e. are coprime).
 
