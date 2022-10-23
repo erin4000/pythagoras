@@ -4,7 +4,7 @@ Efficient generation of primitive pythagorean triples in ascending order.
 
 A **Pythagorean triple** is a triple of positive integers $(a,b,c)$ such that $a^2+b^2=c^2$. A **primitive** Pythagorean triple is a triple such that $(a,b,c)$ have no common factor between them.
 
-The function `pythagorean_triples()` returns an infinite iterator that enumerates all primitive triples $a<b<c$ in order of increasing $c$, followed by increasing $a$. For example, $(20,21,29)$ will come before $(12,35,37)$ as 29 < 37, while $(16, 63, 65)$ will come before $(33, 56, 65)$ as $16 < 33$.
+The function `pythagorean_triples()` returns an infinite iterator that enumerates all primitive triples $a < b < c$ in order of increasing $c$, followed by increasing $a$. For example, $(20,21,29)$ will come before $(12,35,37)$ as 29 < 37, while $(16, 63, 65)$ will come before $(33, 56, 65)$ as $16 < 33$.
 
 Example usage:
 
